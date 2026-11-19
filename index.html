@@ -35,9 +35,9 @@
                     Get furry related prizes.
                 </p>
                 <div class="hero-ship-wrap">
-                    <a href="https://forms.hackclub.com/t/s5ESiXfvTXus" target="_blank" rel="noopener noreferrer" class="hero-start-btn hero-ship-btn">Ship &rarr;</a>
+                    <a href="https://forms.hackclub.com/t/s5ESiXfvTXus" target="_blank" rel="noopener noreferrer" class="hero-start-btn hero-ship-btn" id="shipBtn">Ship &rarr;</a>
                 </div>
-                <p class="hero-credits">Made with <img src="images/black-heart-icon.png" alt="heart" class="heart-icon"> by <strong>agm</strong> and <strong>ilovepasta</strong> for <a href="https://hackclub.com" target="_blank" rel="noopener noreferrer">Hack Club</a></p>
+                <p class="hero-credits">Sponsored by <strong>Seba</strong> for <a href="https://hackclub.com" target="_blank" rel="noopener noreferrer">Hack Club</a></p>
             </div>
         </header>
         <section class="how-it-works" id="howItWorks">
@@ -248,6 +248,42 @@
                 </div>
             </div>
         </footer>
+        <div class="ship-modal" id="shipModal" role="dialog" aria-modal="true" aria-label="Ship your project" hidden>
+            <div class="ship-modal-backdrop" data-close-ship></div>
+            <div class="ship-modal-box">
+                <div class="ship-modal-head">
+                    <span class="ship-modal-title">Ship your project</span>
+                    <a href="https://forms.hackclub.com/t/s5ESiXfvTXus" target="_blank" rel="noopener noreferrer" class="ship-modal-open">open in new tab &nearr;</a>
+                    <button type="button" class="ship-modal-close" aria-label="Close" data-close-ship>&times;</button>
+                </div>
+                <iframe class="ship-modal-frame" id="shipFrame" title="Pawgrammed ship form" data-src="https://forms.hackclub.com/t/s5ESiXfvTXus" loading="lazy"></iframe>
+            </div>
+        </div>
+        <script>
+            (function() {
+                var btn = document.getElementById('shipBtn');
+                var modal = document.getElementById('shipModal');
+                var frame = document.getElementById('shipFrame');
+                if (!btn || !modal || !frame) return;
+                function openShip(e) {
+                    e.preventDefault();
+                    if (!frame.src) frame.src = frame.getAttribute('data-src');
+                    modal.hidden = false;
+                    document.body.classList.add('ship-modal-open-body');
+                }
+                function closeShip() {
+                    modal.hidden = true;
+                    document.body.classList.remove('ship-modal-open-body');
+                }
+                btn.addEventListener('click', openShip);
+                modal.querySelectorAll('[data-close-ship]').forEach(function(el) {
+                    el.addEventListener('click', closeShip);
+                });
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && !modal.hidden) closeShip();
+                });
+            })();
+        </script>
         <script src="faq.js"></script>
         <script src="intro.js"></script>
         <script src="pathway.js"></script>
